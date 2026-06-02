@@ -1,66 +1,83 @@
-# NEXUS
+# BOREACLE
 
 ### Autonomous Analytics Infrastructure
 
-**Why it works:**
+A name born from enterprise software fatigue.
 
-A *nexus* is the central connection point where multiple systems converge and intelligence emerges from relationships.
+Where legacy analytics platforms became:
 
-That is literally your platform architecture:
+* bloated,
+* slow,
+* expensive,
+* disconnected,
+* and operationally dead,
 
-* Data Pipelines ⇄ Infrastructure Containers
-* Git Repositories ⇄ Deployments
-* Jira Incidents ⇄ Business KPIs
-* Real-Time Compute ⇄ Operational Workflows
-* Graph Intelligence ⇄ Human Decisions
+**BOREACLE** exists as the direct opposite.
 
-The name implies:
+It is both:
 
-* interconnected systems,
-* graph-native architecture,
-* orchestration,
-* operational intelligence,
-* and enterprise-scale infrastructure.
+* a parody of old enterprise infrastructure,
+* and a genuinely memorable systems-level brand.
 
-It also sounds:
+---
 
-* premium,
+# Why The Name Works
+
+“Boreacle” immediately communicates:
+
+```text id="d8f2nw"
+We know exactly what is broken with enterprise data systems.
+```
+
+That makes the name:
+
+* self-aware,
 * memorable,
-* scalable,
-* and believable beside companies like Snowflake, Databricks, Palantir, Confluent, and Neo4j.
+* developer-friendly,
+* anti-corporate,
+* and surprisingly brandable.
+
+It feels like:
+
+* a rebellious infrastructure company,
+* a hacker-built analytics engine,
+* or a next-generation replacement for legacy BI ecosystems.
 
 ---
 
-# Why Not “Operating System”?
+# Architectural Symbolism
 
-Technically, your product is software — not an operating system in the traditional sense like Linux or Windows.
+BOREACLE replaces:
 
-However, many modern enterprise platforms use “operating system” metaphorically to describe software that becomes the central coordination layer for workflows, infrastructure, and intelligence.
-
-Examples:
-
-* “Business Operating System”
-* “Data Operating System”
-* “AI Operating System”
-
-That said, if you want clearer positioning and less buzzword risk, it is stronger to describe NEXUS as:
-
-* a platform,
-* infrastructure layer,
-* runtime,
-* orchestration system,
-* or analytics engine.
-
-Those terms are more technically precise and easier for engineers and enterprise buyers to trust immediately.
+| Legacy Problem        | BOREACLE Solution           |
+| --------------------- | --------------------------- |
+| Dead dashboards       | Operational workflows       |
+| Always-on clusters    | KEDA scale-to-zero compute  |
+| Static notebooks      | Live visual/code parity     |
+| Flat tables           | Enterprise knowledge graphs |
+| Manual issue tracking | Jira-native anomaly actions |
 
 ---
 
-# Brand Positioning
+# Brand Identity
+
+## Core Vibe
+
+* dark infrastructure UI
+* terminal-first aesthetics
+* graph-native visual systems
+* anti-enterprise-enterprise branding
+* cyberpunk observability
+* “built by engineers who suffered through old tooling”
+
+---
+
+# Positioning
 
 ## Primary
 
-```text
-NEXUS
+```text id="i7z3qm"
+BOREACLE
 Autonomous Analytics Infrastructure
 ```
 
@@ -68,100 +85,56 @@ Autonomous Analytics Infrastructure
 
 ## Alternative Taglines
 
-```text
-NEXUS
+```text id="h2x9vl"
+BOREACLE
+The End of Dead Dashboards
+```
+
+```text id="p0q7rt"
+BOREACLE
 Graph-Native Operational Intelligence
 ```
 
-```text
-NEXUS
-Where Infrastructure Becomes Intelligence
+```text id="f5m1ow"
+BOREACLE
+Infrastructure That Understands Relationships
 ```
 
-```text
-NEXUS
-Unified Analytics. Live Operations.
-```
-
-```text
-NEXUS
-The Enterprise Knowledge Graph Runtime
-```
-
-```text
-NEXUS
-Infrastructure for Autonomous Intelligence
+```text id="r9y2nk"
+BOREACLE
+Analytics Without Enterprise Rot
 ```
 
 ---
 
-# Why the Name Is Strong
+# Why It’s Actually Strong
 
-Unlike generic AI startup names, “NEXUS” has:
+The best tech names usually:
 
-* conceptual meaning,
-* architectural relevance,
-* memorability,
-* and executive-level credibility.
+* sound opinionated,
+* have lore,
+* create identity,
+* and trigger curiosity.
 
-It naturally fits:
+BOREACLE does all of those instantly.
 
-* Kubernetes infrastructure,
-* graph databases,
-* observability systems,
-* analytics platforms,
-* and cloud-native orchestration.
+People will ask:
 
-It can expand cleanly into:
-
-* Nexus Cloud
-* Nexus Graph
-* Nexus Runtime
-* Nexus Compute
-* Nexus Flow
-* NexusOS
-
----
-
-# Visual Identity Direction
-
-## Brand Aesthetic
-
-* dark enterprise UI
-* black / graphite / silver
-* electric blue accents
-* thin graph connection lines
-* animated node systems
-* infrastructure topology visuals
-* minimal typography
-
-Think:
-
-* Palantir
-* Linear
-* Vercel
-* Anduril
-* Datadog
-
-but more graph-centric and operational.
-
----
-
-# Domain Style
-
-```text
-nexus.ai
-nexuscloud.io
-nexusgraph.dev
-nexusruntime.com
-buildnexus.dev
-nexusos.ai
+```text id="l4n0ab"
+“Wait… why is it called Boreacle?”
 ```
 
+And the answer immediately explains your thesis:
+
+* legacy enterprise analytics became bloated and disconnected,
+* so you rebuilt the stack from first principles.
+
+That is powerful branding.
+
 ---
 
-# One-Line Pitch
+# Final Positioning
 
-```text
-NEXUS is a graph-native analytics platform that unifies serverless compute, operational workflows, and enterprise intelligence into a single autonomous infrastructure layer.
+```text id="z6x3pc"
+BOREACLE is a graph-native analytics infrastructure platform that unifies serverless compute, operational workflows, and enterprise intelligence into a single autonomous system.
 ```
