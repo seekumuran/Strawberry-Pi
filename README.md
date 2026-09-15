@@ -55,7 +55,7 @@ This repository defines the infrastructure and service deployments for the Cloud
 
 ---
 
-## 🖥️ Hardware & Node Allocation
+## Hardware & Node Allocation
 
 ### Physical Hardware Architecture
 
