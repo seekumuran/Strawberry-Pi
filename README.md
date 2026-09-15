@@ -4,17 +4,17 @@ Infrastructure as Code (IaC) configuration and container orchestration for an en
 
 ---
 
-## 📖 Overview
+## Overview
 
 This repository defines the infrastructure and service deployments for the Cloud Supply Chain Management system. The platform manages logistics workflows, inventory integration, document management, and automated supply chain pipelines across a multi-node infrastructure.
 
-* **Provisioning & Automation:** Infrastructure is dynamically provisioned on hypervisors using [Terraform](https://www.google.com/search?q=terraform/) with base VM images created using [Packer](https://www.google.com/search?q=packer/).
+* **Provisioning & Automation:** Infrastructure is dynamically provisioned across physical nodes using [Terraform](https://www.google.com/search?q=terraform/) with base VM images created using [Packer](https://www.google.com/search?q=packer/).
 * **Deployment & Orchestration:** Services are containerized via [Docker Compose](https://www.google.com/search?q=docker/) with ongoing migration plans to a lightweight [Kubernetes (K3s)](https://www.google.com/search?q=kubernetes/) cluster for microservices management.
 * **Configuration & Secrets:** [Ansible](https://www.google.com/search?q=ansible/) playbooks manage system configurations and pull sensitive environment variables directly from [HashiCorp Vault](https://www.google.com/search?q=external/).
 
 ---
 
-## 🛠 Infrastructure & Core Stack
+## Infrastructure & Core Stack
 
 ### Infrastructure & Tools
 
@@ -39,7 +39,7 @@ This repository defines the infrastructure and service deployments for the Cloud
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 .
@@ -57,28 +57,18 @@ This repository defines the infrastructure and service deployments for the Cloud
 
 ## 🖥️ Hardware & Node Allocation
 
-### Physical Infrastructure
+### Physical Hardware Architecture
 
-| Host | CPU | Threads | RAM | Storage | Role |
-| --- | --- | --- | --- | --- | --- |
-| **Vyria** | AMD Ryzen 5 5600X | 12 | 16 GB | 480 GB NVMe | Primary Application Server |
-| **Alpha** | Intel i5-6200U | 4 | 8 GB | 128 GB SATA SSD | K3s Worker / Edge Node |
-| **Beta** | Intel i5-7300U | 4 | 8 GB | 256 GB SATA SSD | K3s Worker / Auxiliary Services |
+| Host Node | OS / Platform | Role in Supply Chain Infrastructure |
+| --- | --- | --- |
+| **Linux Server** | Linux (Ubuntu Server / Debian) | Primary Compute Node (Virtualization & Core Microservices Host) |
+| **Windows Node 1** | Windows | Logistics Workstation & Monitoring Client |
+| **Windows Node 2** | Windows | Warehouse Inventory Management & ERP Integration Node |
+| **Windows Node 3** | Windows | Administrative & Supply Chain Analytics Host |
+| **Raspberry Pi** | Raspberry Pi OS / Linux | Edge Gateway / Warehouse IoT Collector & K3s Edge Node |
 
-### Virtual Machine Deployment
+### Service & VM Deployment
 
-* **Vyria VM:** 4 Cores / 8 GB RAM / 260 GB Storage – Core supply chain services & database backends
-* **Kubernetes Node 1:** 2 Cores / 2 GB RAM / 10 GB Storage – Primary K3s cluster node
-* **Kubernetes Node 2:** 2 Cores / 2 GB RAM / 10 GB Storage – Secondary K3s cluster node
-* **Kubernetes Node 3:** 2 Cores / 2 GB RAM / 10 GB Storage – Edge service cluster node
-
----
-
-## 📌 Roadmap & To-Do
-
-* [x] Initial infrastructure definition and README documentation
-* [x] Establish basic observability and monitoring stacks
-* [ ] Implement Proxmox metrics integration for resource monitoring
-* [ ] Automate Terraform and Packer secret fetching directly from Vault
-* [ ] Build end-to-end CI/CD pipelines for deployment updates
-* [ ] Complete full service migration from Docker Compose to K3s
+* **Primary Linux Host:** Runs core docker stacks, application databases, and primary Kubernetes master components.
+* **Raspberry Pi Node:** Lightweight K3s agent node for edge telemetry, barcode scanner triggers, and local device management.
+* **Windows Cluster Hosts:** Integrated via Tailscale/Headscale subnet routers for administrative controls and database sync.
