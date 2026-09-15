@@ -1,0 +1,54 @@
+name: Run Ansible Playbook
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-playbook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.VYRIA_SSH_PRIVATE_KEY }}
+
+      - name: Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          args: --login-server=${{ secrets.TAILSCALE_URL }}
+
+      - name: Add known hosts
+        run: |
+          VYRIA_IP=$(tailscale ip vyria | head -1)
+          echo -E "[vyria]:2304 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1x+gmyzqH+EfG07eYS6XkteT2aqoYKmMW78fgfFp1M" >> ~/.ssh/known_hosts
+          echo -E "[vyria]:2304 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCReO4l2yjTR4MWJSzTFMol+Wj1VgVPLGQFpt1Fcm2tLxv+BVQ7TGGvevIbTLXWLy7SODOR4+NJuyjtbfx50jCSNkhzXH9jdfCIAkZcotwObTOFkt1PRLW9ILH3oRtwlovDmwDs9DkLmmXZupOQLb6RmY5x1QQj3+LLlPVByahfiLdt4HyAWKL6YtL63S1Ls4ioFl+QFApkXqm5Of5GrYMz74vsh8JmBDjN3g8oH0a23520MKyiJfz4VgYXH+hevnUx+gx3PxMHJz4TwsOefNhuGdzm4/2m6J1ALPfuu4BGgvHYV/FLE0FG+ooDNTIcFwaFrxSVL6oJPK5Y/Cdcb3C3MwLoggk67xjOkqlIx8Q1QOzIPUt4hG6ZFwHWyhjXgqNgT1sieITG3RQB22+CeSLpBdDDFvMtkYeNEjJy5sHVXKukcDojjNA/tWMKKCeXkQBtOyFQqWgAdQdyeMondNCWIdNLKVsUSi7tF/mOuNK7FGnncacuPhh4zwngPF21UMs=" >> ~/.ssh/known_hosts
+          echo -E "[vyria]:2304 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDryde6NZ7Sr8t0FY+8Z0Xm8FIvOIsYkqkeVJvV8s16uuTl0JVrKZtbM5Htsp4st8VLj5ZJE2vDXgM3lUZMVnhA=" >> ~/.ssh/known_hosts
+          echo -E "[$VYRIA_IP]:2304 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA1x+gmyzqH+EfG07eYS6XkteT2aqoYKmMW78fgfFp1M" >> ~/.ssh/known_hosts
+          echo -E "[$VYRIA_IP]:2304 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCReO4l2yjTR4MWJSzTFMol+Wj1VgVPLGQFpt1Fcm2tLxv+BVQ7TGGvevIbTLXWLy7SODOR4+NJuyjtbfx50jCSNkhzXH9jdfCIAkZcotwObTOFkt1PRLW9ILH3oRtwlovDmwDs9DkLmmXZupOQLb6RmY5x1QQj3+LLlPVByahfiLdt4HyAWKL6YtL63S1Ls4ioFl+QFApkXqm5Of5GrYMz74vsh8JmBDjN3g8oH0a23520MKyiJfz4VgYXH+hevnUx+gx3PxMHJz4TwsOefNhuGdzm4/2m6J1ALPfuu4BGgvHYV/FLE0FG+ooDNTIcFwaFrxSVL6oJPK5Y/Cdcb3C3MwLoggk67xjOkqlIx8Q1QOzIPUt4hG6ZFwHWyhjXgqNgT1sieITG3RQB22+CeSLpBdDDFvMtkYeNEjJy5sHVXKukcDojjNA/tWMKKCeXkQBtOyFQqWgAdQdyeMondNCWIdNLKVsUSi7tF/mOuNK7FGnncacuPhh4zwngPF21UMs=" >> ~/.ssh/known_hosts
+          echo -E "[$VYRIA_IP]:2304 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBDryde6NZ7Sr8t0FY+8Z0Xm8FIvOIsYkqkeVJvV8s16uuTl0JVrKZtbM5Htsp4st8VLj5ZJE2vDXgM3lUZMVnhA=" >> ~/.ssh/known_hosts
+          
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Ansible
+        run: |
+          pip install ansible hvac
+          ansible-galaxy collection install community.hashi_vault
+
+      - name: Run Ansible playbook
+        run: |
+          ansible-playbook \
+            -i "vyria," \
+            --extra-vars "ansible_user=${{ secrets.ANSIBLE_USER }} ansible_port=${{ secrets.ANSIBLE_PORT }}" \
+            --extra-vars "ansible_hashi_vault_url=${{ secrets.ANSIBLE_HASHI_VAULT_URL }} ansible_hashi_vault_token=${{ secrets.ANSIBLE_HASHI_VAULT_TOKEN }}" \
+            --extra-vars "ansible_sudo_pass=${{ secrets.ANSIBLE_SUDO_PASS }}" \
+            ansible/playbooks/docker-vyria.yml
